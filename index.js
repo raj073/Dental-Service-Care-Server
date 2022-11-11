@@ -49,7 +49,6 @@ async function run() {
         })
 
         app.get('/services', async (req, res) => {
-            console.log('hello');
             const size = parseInt(req.query.size);
             const query = {}
             const cursor = serviceCollection.find(query);
@@ -82,7 +81,6 @@ async function run() {
         app.post('/review', async (req, res) => {
             const order = req.body;
             const result = await reviewCollection.insertOne(order);
-            console.log('order:', result);
             res.send(result);
         });
 
@@ -131,19 +129,19 @@ async function run() {
             res.send(result);
         })
 
-        //update review
-        app.patch('/review/:id', async (req, res) => {
-            const id = req.params.id;
-            const newText = req.body.reviewText;
-            const query = { _id: ObjectId(id) };
-            const updatedDoc = {
-                $set: {
-                    reviewText: newText,
-                }
-            }
-            const result = await reviewCollection.updateOne(query, updatedDoc)
-            res.send(result);
-        })
+        // //update review
+        // app.patch('/review/:id', async (req, res) => {
+        //     const id = req.params.id;
+        //     const newText = req.body.reviewText;
+        //     const query = { _id: ObjectId(id) };
+        //     const updatedDoc = {
+        //         $set: {
+        //             reviewText: newText,
+        //         }
+        //     }
+        //     const result = await reviewCollection.updateOne(query, updatedDoc)
+        //     res.send(result);
+        // })
 
     }
     finally {
