@@ -121,7 +121,7 @@ async function run() {
             res.send(reviews);
         })
 
-        //delete review
+        //delete review of service
         app.delete('/reviews/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
