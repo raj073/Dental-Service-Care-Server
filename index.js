@@ -19,11 +19,11 @@ app.get('/', (req, res) => {
     res.send('Dental Care service API Running');
 })
 
+//verification of jwt
 function verifyJWT(req, res, next) {
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {
-        console.log('found you!');
         return res.status(401).send({ message: 'unauthorized access' });
     }
     const token = authHeader.split(' ')[1];
@@ -88,17 +88,14 @@ async function run() {
         app.get('/review/:id', async (req, res) => {
             const id = req.params.id;
             const query = { serviceId: id };
-            console.log(query);
             const cursor = reviewCollection.find(query).sort({ insertingTime: -1 });
             const reviews = await cursor.toArray();
-            console.log(reviews);
             res.send(reviews);
         })
 
         //get reviews by id
         app.get('/reviewById/:_id', async (req, res) => {
             const id = req.params._id;
-            console.log('id--', id);
             const query = { _id: ObjectId(id) };
             const review = await reviewCollection.findOne(query);
             console.log('single review', review);
