@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
     res.send('Dental Care Services Server is Running');
 })
 
-//
+//Listen Port
 app.listen(port, () => {
     console.log(`Dental Care Services Running on: ${port}`);
 })
